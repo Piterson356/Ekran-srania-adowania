@@ -18,7 +18,8 @@
         .center-panel { text-align: center; width: 400px; }
         .server-logo { width: 280px; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(0,170,255,0.5)); }
         h1 { color: #00aaff; margin: 10px 0; text-transform: uppercase; letter-spacing: 4px; font-size: 24px; }
-        .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; }
+        .info-text { color: #aaa; font-size: 13px; margin: 5px 0; font-weight: 300; text-transform: uppercase; }
+        .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 20px; }
         .loader-fill { background: linear-gradient(90deg, #00aaff, #00ffcc); height: 100%; width: 0%; transition: width 0.4s; }
         .rules-box h2 { color: #00ffcc; font-size: 1.1rem; text-transform: uppercase; border-bottom: 1px solid #333; width: 100%; padding-bottom: 8px; text-align: center; margin-top: 0; }
         .rules-box ul { padding-left: 18px; color: #ddd; font-size: 0.85rem; line-height: 1.8; margin-top: 15px; list-style-type: '➜ '; }
@@ -37,9 +38,10 @@
         <div class="center-panel">
             <img src="cdnlogo.png" class="server-logo" onerror="this.style.display='none'">
             <h1 id="servername">ŁĄCZENIE...</h1>
-            <p style="color:#aaa; font-size:13px;">MAPA: <span id="mapname">WCZYTYWANIE...</span></p>
+            <div class="info-text">TRYB: <span id="gamemode" style="color:white;">WCZYTYWANIE...</span></div>
+            <div class="info-text">MAPA: <span id="mapname" style="color:white;">WCZYTYWANIE...</span></div>
             <div class="loader-bar"><div id="fill" class="loader-fill"></div></div>
-            <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold;">INICJALIZACJA...</div>
+            <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold; text-transform: uppercase;">INICJALIZACJA...</div>
         </div>
         <div class="side-panel rules-box">
             <h2>Regulamin</h2>
@@ -70,6 +72,8 @@
         function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
+            document.getElementById("gamemode").innerText = gamemode;
+            
             if (steamid && steamid !== "%s") {
                 const av = document.getElementById("avatar");
                 av.src = "https://www.steamid.pro" + steamid + ".png";
@@ -84,7 +88,7 @@
                 }).catch(() => { document.getElementById("player-name").innerText = "Graczu"; });
             }
             var music = document.getElementById("loading-music");
-            music.volume = 0.7; music.play().catch(() => {});
+            music.volume = 0.2; music.play().catch(() => {});
         }
 
         function SetFilesNeeded(needed) { totalFiles = needed > 0 ? needed : 100; }
