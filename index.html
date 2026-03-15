@@ -23,18 +23,32 @@
         
         .side-panel { 
             background: rgba(0, 0, 0, 0.85); padding: 30px; border-radius: 20px; 
-            border: 1px solid rgba(0, 170, 255, 0.2); width: 280px; min-height: 250px; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            border: 1px solid rgba(0, 170, 255, 0.2); width: 320px; min-height: 250px; 
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
         }
 
-        #avatar { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #00aaff; margin-bottom: 15px; box-shadow: 0 0 25px rgba(0,170,255,0.6); display: none; }
-        
-        #player-name { font-size: 1.5rem; color: #00aaff; font-weight: bold; text-align: center; }
+        /* --- STYL LISTY TRYBÓW --- */
+        .gamemodes-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dwa rzędy/kolumny */
+            gap: 15px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .gamemode-item {
+            background: rgba(0, 170, 255, 0.1);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         .center-panel { text-align: center; width: 400px; }
-        
         .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 20px; }
-        
         .loader-fill { background: linear-gradient(90deg, #00aaff, #00ffcc); height: 100%; width: 0%; transition: width 0.4s; }
     </style>
 </head>
@@ -45,15 +59,28 @@
 
     <div class="main-layout">
         
-        <!-- LEWA STRONA: PROFIL GRACZA -->
+        <!-- ========================================== -->
+        <!-- LEWA STRONA: LISTA TRYBÓW (2 KOLUMNY) -->
+        <!-- ========================================== -->
         <div class="side-panel">
-            <img id="avatar" src="">
-            <div style="font-size: 1.1rem; color: #fff; margin-bottom: 5px;">Witaj,</div>
-            <div id="player-name">Graczu</div>
-            <div id="player-steamid" style="font-size: 10px; color: #555; margin-top: 10px;">ID: Oczekiwanie...</div>
+            <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
+                Dostępne Tryby
+            </div>
+            
+            <div class="gamemodes-container">
+                <!-- Tutaj wpisz swoje tryby -->
+                <div class="gamemode-item">Slashers</div>
+                <div class="gamemode-item">Stop it, Slender!</div>
+                <div class="gamemode-item">Prop Hunt</div>
+                <div class="gamemode-item">Murder</div>
+                <div class="gamemode-item">TTT</div>
+                <div class="gamemode-item">Zombie</div>
+            </div>
         </div>
 
+        <!-- ========================================== -->
         <!-- ŚRODEK: LOGO I STATUS ŁADOWANIA -->
+        <!-- ========================================== -->
         <div class="center-panel">
             <img src="cdnlogos.png" style="width:280px; margin-bottom:15px; filter: drop-shadow(0 0 20px rgba(0,170,255,0.8));" onerror="this.style.display='none'">
             <h1 id="servername" style="color:#00aaff; text-transform:uppercase; font-size:24px;">ŁĄCZENIE...</h1>
@@ -67,7 +94,9 @@
             <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold; text-transform: uppercase;">Inicjalizacja...</div>
         </div>
 
+        <!-- ========================================== -->
         <!-- PRAWA STRONA: REGULAMIN -->
+        <!-- ========================================== -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Regulamin
@@ -87,7 +116,6 @@
     <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/ogg"></audio>
 
     <script>
-        /* --- LOGIKA ZMIANY ZDJĘĆ I POBIERANIA DANYCH (JS) --- */
         const images = ["cdn_1.jpg", "cdn_2.jpg", "cdn_3.jpg", "cdn_4.jpg", "cdn_5.jpg", "cdn_6.jpg", "cdn_7.jpg", "cdn_8.jpg", "cdn_9.jpg", "cdn_10.jpg", "cdn_11.jpg", "cdn_12.jpg", "cdn_13.jpg"];
         let currentIndex = 0;
         function changeImage() {
@@ -101,30 +129,13 @@
         setInterval(changeImage, 8000); 
         changeImage();
 
-        function updateProfile(sid) {
-            if (!sid || sid === "%s" || sid.length < 5) return;
-            document.getElementById("avatar").src = "https://www.steamid.pro" + sid + ".png";
-            document.getElementById("avatar").style.display = "block";
-            document.getElementById("player-steamid").innerText = "ID: " + sid;
-            fetch(`https://api.steamid.uk{sid}&request_type=player_summaries`)
-                .then(res => res.json()).then(data => { 
-                    if(data.player_summaries && data.player_summaries.personaname) {
-                        document.getElementById("player-name").innerText = data.player_summaries.personaname;
-                    }
-                }).catch(() => { document.getElementById("player-name").innerText = "Graczu"; });
-        }
-
         function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
             document.getElementById("gamemode").innerText = gamemode;
-            updateProfile(steamid);
             const music = document.getElementById("loading-music");
             music.volume = 0.2; music.play().catch(() => {});
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.get('steamid')) updateProfile(urlParams.get('steamid'));
 
         function SetFilesNeeded(n) { totalFiles = n > 0 ? n : 100; }
         function SetFilesRemaining(r) { document.getElementById("fill").style.width = Math.min(100, ((totalFiles - r) / totalFiles) * 100) + "%"; }
