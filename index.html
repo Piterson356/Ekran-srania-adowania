@@ -45,19 +45,15 @@
 
     <div class="main-layout">
         
-        <!-- ========================================== -->
         <!-- LEWA STRONA: PROFIL GRACZA -->
-        <!-- ========================================== -->
         <div class="side-panel">
             <img id="avatar" src="">
             <div style="font-size: 1.1rem; color: #fff; margin-bottom: 5px;">Witaj,</div>
             <div id="player-name">Graczu</div>
-            <div id="player-steamid" style="font-size: 10px; color: #555; margin-top: 10px;">Oczekiwanie...</div>
+            <div id="player-steamid" style="font-size: 10px; color: #555; margin-top: 10px;">ID: Oczekiwanie...</div>
         </div>
 
-        <!-- ========================================== -->
         <!-- ŚRODEK: LOGO I STATUS ŁADOWANIA -->
-        <!-- ========================================== -->
         <div class="center-panel">
             <img src="cdnlogos.png" style="width:280px; margin-bottom:15px; filter: drop-shadow(0 0 20px rgba(0,170,255,0.8));" onerror="this.style.display='none'">
             <h1 id="servername" style="color:#00aaff; text-transform:uppercase; font-size:24px;">ŁĄCZENIE...</h1>
@@ -71,9 +67,7 @@
             <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold; text-transform: uppercase;">Inicjalizacja...</div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- PRAWA STRONA: REGULAMIN (TUTAJ EDYTUJ) -->
-        <!-- ========================================== -->
+        <!-- PRAWA STRONA: REGULAMIN -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Regulamin
@@ -90,7 +84,6 @@
 
     </div>
 
-    <!-- --- MUZYKA --- -->
     <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/ogg"></audio>
 
     <script>
@@ -130,7 +123,6 @@
             music.volume = 0.2; music.play().catch(() => {});
         }
 
-        // Próba wyciągnięcia ID z URL
         const urlParams = new URLSearchParams(window.location.search);
         if(urlParams.get('steamid')) updateProfile(urlParams.get('steamid'));
 
