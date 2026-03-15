@@ -59,7 +59,7 @@
         <!-- ŚRODEK: LOGO I STATUS ŁADOWANIA -->
         <!-- ========================================== -->
         <div class="center-panel">
-            <img src="logo.png" style="width:280px; margin-bottom:15px; filter: drop-shadow(0 0 20px rgba(0,170,255,0.8));" onerror="this.style.display='none'">
+            <img src="cdnlogos.png" style="width:280px; margin-bottom:15px; filter: drop-shadow(0 0 20px rgba(0,170,255,0.8));" onerror="this.style.display='none'">
             <h1 id="servername" style="color:#00aaff; text-transform:uppercase; font-size:24px;">ŁĄCZENIE...</h1>
             
             <div style="color:#aaa; font-size:13px; margin: 5px 0;">TRYB: <span id="gamemode" style="color:white;">Wczytywanie...</span></div>
@@ -91,11 +91,11 @@
     </div>
 
     <!-- --- MUZYKA --- -->
-    <audio id="loading-music" loop><source src="muzyka.ogg" type="audio/ogg"></audio>
+    <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/ogg"></audio>
 
     <script>
         /* --- LOGIKA ZMIANY ZDJĘĆ I POBIERANIA DANYCH (JS) --- */
-        const images = ["cdn1.jpg", "cdn2.jpg", "cdn3.jpg", "cdn4.jpg", "cdn5.jpg", "cdn6.jpg"];
+        const images = ["cdn_1.jpg", "cdn_2.jpg", "cdn_3.jpg", "cdn_4.jpg", "cdn_5.jpg", "cdn_6.jpg", "cdn_7.jpg", "cdn_8.jpg", "cdn_9.jpg", "cdn_10.jpg", "cdn_11.jpg", "cdn_12.jpg", "cdn_13.jpg"];
         let currentIndex = 0;
         function changeImage() {
             const img = new Image();
