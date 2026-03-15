@@ -48,8 +48,7 @@
         }
 
         .center-panel { text-align: center; width: 400px; }
-        .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 20px; }
-        .loader-fill { background: linear-gradient(90deg, #00aaff, #00ffcc); height: 100%; width: 0%; transition: width 0.4s; }
+        h1 { color: #00aaff; margin: 10px 0; text-transform: uppercase; letter-spacing: 4px; font-size: 24px; }
     </style>
 </head>
 <body>
@@ -69,17 +68,17 @@
             
             <div class="gamemodes-container">
                 <!-- Tutaj wpisz swoje tryby -->
-                <div class="gamemode-item">Slashers</div>
+                <div class="gamemode-item">Death Run</div>
                 <div class="gamemode-item">Stop it, Slender!</div>
-                <div class="gamemode-item">Prop Hunt</div>
-                <div class="gamemode-item">Murder</div>
+                <div class="gamemode-item">Puzzle [Wkrótce]</div>
+                <div class="gamemode-item">Slashers</div>
                 <div class="gamemode-item">TTT</div>
-                <div class="gamemode-item">Zombie</div>
+                <div class="gamemode-item">Prop Hunt</div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- ŚRODEK: LOGO I STATUS ŁADOWANIA -->
+        <!-- ŚRODEK: LOGO I INFORMACJE (BEZ PASKA) -->
         <!-- ========================================== -->
         <div class="center-panel">
             <img src="cdnlogos.png" style="width:280px; margin-bottom:15px; filter: drop-shadow(0 0 20px rgba(0,170,255,0.8));" onerror="this.style.display='none'">
@@ -87,11 +86,7 @@
             
             <div style="color:#aaa; font-size:13px; margin: 5px 0;">TRYB: <span id="gamemode" style="color:white;">Wczytywanie...</span></div>
             <div style="color:#aaa; font-size:13px; margin: 5px 0;">MAPA: <span id="mapname" style="color:white;">Wczytywanie...</span></div>
-            
-            <div class="loader-bar">
-                <div id="fill" class="loader-fill"></div>
-            </div>
-            <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold; text-transform: uppercase;">Inicjalizacja...</div>
+
         </div>
 
         <!-- ========================================== -->
@@ -113,6 +108,7 @@
 
     </div>
 
+    <!-- --- MUZYKA --- -->
     <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/ogg"></audio>
 
     <script>
@@ -129,18 +125,21 @@
         setInterval(changeImage, 8000); 
         changeImage();
 
+        // Podstawowa funkcja odbierająca dane z serwera
         function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
             document.getElementById("gamemode").innerText = gamemode;
+            
             const music = document.getElementById("loading-music");
-            music.volume = 0.2; music.play().catch(() => {});
+            music.volume = 0.2; 
+            music.play().catch(() => {});
         }
 
-        function SetFilesNeeded(n) { totalFiles = n > 0 ? n : 100; }
-        function SetFilesRemaining(r) { document.getElementById("fill").style.width = Math.min(100, ((totalFiles - r) / totalFiles) * 100) + "%"; }
-        function SetStatusChanged(s) { document.getElementById("status").innerText = s; }
-        var totalFiles = 100;
+        // Puste funkcje (wymagane, by Gmod nie wywalał błędów w konsoli)
+        function SetFilesNeeded(n) {}
+        function SetFilesRemaining(r) {}
+        function SetStatusChanged(s) {}
     </script>
 </body>
 </html>
