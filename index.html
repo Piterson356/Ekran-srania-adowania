@@ -6,148 +6,85 @@
     <title>Ładowanie serwera...</title>
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', sans-serif; color: white; }
-        
-        /* TŁO I EFEKT KINOWY */
         #bg-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; transform: scale(1.1); }
         @keyframes kenburns { 0% { transform: scale(1.1); } 100% { transform: scale(1.3); } }
         .active { opacity: 1; animation: kenburns 15s linear forwards; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); z-index: 2; }
-
-        /* GŁÓWNY UKŁAD */
-        .main-layout {
-            position: relative; z-index: 3;
-            display: flex; align-items: center; justify-content: space-around;
-            height: 100vh; padding: 0 50px;
-        }
-
-        /* PANELE BOCZNE */
-        .side-panel {
-            background: rgba(0, 0, 0, 0.85); padding: 30px; border-radius: 20px;
-            border: 1px solid rgba(0, 170, 255, 0.2); width: 280px; min-height: 250px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-
-        /* LEWA: PROFIL GRACZA */
-        #avatar { 
-            width: 110px; height: 110px; border-radius: 50%; 
-            border: 4px solid #00aaff; margin-bottom: 15px; 
-            box-shadow: 0 0 25px rgba(0,170,255,0.6); display: none;
-        }
-        #welcome-msg { font-size: 1.1rem; color: #fff; text-align: center; margin-bottom: 5px; }
-        #player-name { font-size: 1.5rem; color: #00aaff; font-weight: bold; text-align: center; text-shadow: 0 0 10px rgba(0,170,255,0.5); }
-        .steam-id { font-size: 10px; color: #555; margin-top: 10px; font-family: monospace; }
-
-        /* ŚRODEK: LOGO I STATUS */
+        .main-layout { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-around; height: 100vh; padding: 0 50px; }
+        .side-panel { background: rgba(0, 0, 0, 0.85); padding: 30px; border-radius: 20px; border: 1px solid rgba(0, 170, 255, 0.2); width: 280px; min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #avatar { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #00aaff; margin-bottom: 15px; box-shadow: 0 0 25px rgba(0,170,255,0.6); background: #222; }
+        #player-name { font-size: 1.5rem; color: #00aaff; font-weight: bold; text-align: center; }
         .center-panel { text-align: center; width: 400px; }
         .server-logo { width: 280px; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(0,170,255,0.5)); }
-        h1 { color: #00aaff; margin: 10px 0; text-transform: uppercase; letter-spacing: 4px; font-size: 24px; text-shadow: 0 0 10px rgba(0,0,0,1); }
-        .map-info { color: #aaa; margin-bottom: 25px; font-size: 13px; font-weight: 300; }
-        
-        .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; box-shadow: inset 0 0 5px #000; }
+        h1 { color: #00aaff; margin: 10px 0; text-transform: uppercase; letter-spacing: 4px; font-size: 24px; }
+        .loader-bar { background: #1a1a1a; height: 8px; border-radius: 4px; overflow: hidden; }
         .loader-fill { background: linear-gradient(90deg, #00aaff, #00ffcc); height: 100%; width: 0%; transition: width 0.4s; }
-        #status { font-size: 10px; color: #444; margin-top: 10px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
-
-        /* PRAWA: REGULAMIN */
-        .rules-box { align-items: flex-start; justify-content: flex-start; }
-        .rules-box h2 { color: #00ffcc; font-size: 1.1rem; margin-top: 0; text-transform: uppercase; border-bottom: 1px solid #333; width: 100%; padding-bottom: 8px; text-align: center; }
+        .rules-box h2 { color: #00ffcc; font-size: 1.1rem; text-transform: uppercase; border-bottom: 1px solid #333; width: 100%; padding-bottom: 8px; text-align: center; margin-top: 0; }
         .rules-box ul { padding-left: 18px; color: #ddd; font-size: 0.85rem; line-height: 1.8; margin-top: 15px; list-style-type: '➜ '; }
-
     </style>
 </head>
 <body>
-
-    <div id="bg-container">
-        <div id="bg1" class="bg-layer"></div>
-        <div id="bg2" class="bg-layer"></div>
-    </div>
+    <div id="bg-container"><div id="bg1" class="bg-layer"></div><div id="bg2" class="bg-layer"></div></div>
     <div class="overlay"></div>
-
     <div class="main-layout">
-        
-        <!-- LEWA: PROFIL GRACZA -->
         <div class="side-panel">
-            <img id="avatar" src="">
-            <div id="welcome-msg">Witaj,</div>
+            <img id="avatar" src="" style="display:none;">
+            <div style="font-size: 1.1rem; color: #fff; margin-bottom: 5px;">Witaj,</div>
             <div id="player-name">Graczu</div>
-            <div id="player-steamid" class="steam-id"></div>
+            <div id="player-steamid" style="font-size: 10px; color: #555; margin-top: 10px;">ID: Oczekiwanie...</div>
         </div>
-
-        <!-- ŚRODEK: LOGO I STATUS -->
         <div class="center-panel">
             <img src="cdnlogo.png" class="server-logo" onerror="this.style.display='none'">
-            <h1 id="servername">NAZWA SERWERA</h1>
-            <p class="map-info">MAPA: <span id="mapname">WCZYTYWANIE...</span></p>
-            
+            <h1 id="servername">ŁĄCZENIE...</h1>
+            <p style="color:#aaa; font-size:13px;">MAPA: <span id="mapname">WCZYTYWANIE...</span></p>
             <div class="loader-bar"><div id="fill" class="loader-fill"></div></div>
-            <div id="status">INICJALIZACJA POŁĄCZENIA...</div>
+            <div id="status" style="font-size:10px; color:#444; margin-top:10px; font-weight:bold;">INICJALIZACJA...</div>
         </div>
-
-        <!-- PRAWA: REGULAMIN -->
         <div class="side-panel rules-box">
             <h2>Regulamin</h2>
             <ul>
                 <li>Zakaz używania cheatów.</li>
-                <li>Mikrofon od 16 lat (lub mutacja).</li>
+                <li>Nie teamować się.</li>
                 <li>Szanuj innych graczy i adminów.</li>
                 <li>Zakaz RDM / MassRDM.</li>
                 <li>Baw się dobrze!</li>
             </ul>
         </div>
-
     </div>
-
     <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/ogg"></audio>
-
     <script>
-        // --- KONFIGURACJA ZDJĘĆ ---
         const images = ["cdn1.jpg", "cdn2.jpg", "cdn3.jpg", "cdn4.jpg", "cdn5.jpg", "cdn6.jpg"];
-        let currentIndex = 0;
-        let activeLayer = 1;
-
+        let currentIndex = 0; let activeLayer = 1;
         function changeImage() {
             const nextLayer = activeLayer === 1 ? 2 : 1;
             const currentEl = document.getElementById(`bg${activeLayer}`);
             const nextEl = document.getElementById(`bg${nextLayer}`);
             nextEl.style.backgroundImage = `url('${images[currentIndex]}')`;
-            nextEl.classList.remove('active');
-            void nextEl.offsetWidth; 
-            nextEl.classList.add('active');
-            currentEl.classList.remove('active');
-            activeLayer = nextLayer;
-            currentIndex = (currentIndex + 1) % images.length;
+            nextEl.classList.remove('active'); void nextEl.offsetWidth; 
+            nextEl.classList.add('active'); currentEl.classList.remove('active');
+            activeLayer = nextLayer; currentIndex = (currentIndex + 1) % images.length;
         }
+        setInterval(changeImage, 8000); changeImage();
 
-        setInterval(changeImage, 8000);
-        changeImage();
-
-        // --- KOMUNIKACJA GMOD ---
         function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
-            
-            if (steamid) {
-                // Awatar
+            if (steamid && steamid !== "%s") {
                 const av = document.getElementById("avatar");
                 av.src = "https://www.steamid.pro" + steamid + ".png";
-                av.style.display = "inline-block";
+                av.style.display = "block";
                 document.getElementById("player-steamid").innerText = "ID: " + steamid;
 
-                // Pobieranie nicku gracza
                 fetch(`https://api.steamid.uk{steamid}&request_type=player_summaries`)
-                .then(response => response.json())
-                .then(data => {
+                .then(res => res.json()).then(data => {
                     if(data && data.player_summaries && data.player_summaries.personaname) {
                         document.getElementById("player-name").innerText = data.player_summaries.personaname;
                     }
-                })
-                .catch(() => { document.getElementById("player-name").innerText = "Graczu"; });
+                }).catch(() => { document.getElementById("player-name").innerText = "Graczu"; });
             }
-
             var music = document.getElementById("loading-music");
-            music.volume = 0.9;
-            music.play().catch(() => {});
+            music.volume = 0.7; music.play().catch(() => {});
         }
 
         function SetFilesNeeded(needed) { totalFiles = needed > 0 ? needed : 100; }
