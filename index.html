@@ -13,11 +13,10 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background-size: cover; background-position: center; 
             opacity: 0; 
-            transition: opacity 3s ease-in-out; /* Bardzo płynne przenikanie */
+            transition: opacity 3s ease-in-out;
             transform: scale(1.0);
         }
 
-        /* Bardzo powolna animacja - 60 sekund, żeby obraz płynął bez końca */
         @keyframes kenburns {
             0% { transform: scale(1.05); }
             100% { transform: scale(1.4); }
@@ -81,14 +80,11 @@
             const nextLayer = activeLayer === 1 ? 2 : 1;
             const currentEl = document.getElementById(`bg${activeLayer}`);
             const nextEl = document.getElementById(`bg${nextLayer}`);
-            
-            // Ustawiamy nowe zdjęcie na warstwie, która jest pod spodem
+
             nextEl.style.backgroundImage = `url('${images[currentIndex]}')`;
-            
-            // Aktywujemy nową warstwę (opacity 1 i restart animacji Ken Burns)
+
             nextEl.classList.add('active');
-            
-            // Wyłączamy starą warstwę (opacity 0) po krótkiej chwili, by przenikanie było płynne
+
             setTimeout(() => {
                 currentEl.classList.remove('active');
             }, 50);
@@ -97,7 +93,6 @@
             currentIndex = (currentIndex + 1) % images.length;
         }
 
-        // Zmieniamy zdjęcie co 7 sekund (zanim animacja 60s dojdzie do końca)
         setInterval(changeImage, 7000);
         changeImage();
 
