@@ -63,12 +63,13 @@
         </div>
     </div>
 
-    <audio id="loading-music" loop><source src="muzyka.mp3" type="audio/mpeg"></audio>
+    <audio id="loading-music" loop><source src="cdnloading.ogg" type="audio/mpeg"></audio>
 
     <script>
-        // --- TWOJE ZDJĘCIA ---
-        // Tutaj wpisz nazwy plików, które wgrałeś na GitHub:
-        const images = ["zdjecie1.jpg", "zdjecie2.jpg", "zdjecie3.jpg"];
+        // --- Muzyka jest nad tym scriptem ---
+        // --- ZDJĘCIA ---
+        // Nazwy plików, które są wgrywane na GitHub
+        const images = ["cdn1.jpg", "cdn2.jpg", "cdn3.jpg", "cdn4.jpg", "cdn5.jpg", "cdn6.jpg"];
         
         let currentIndex = 0;
         let activeLayer = 1;
@@ -95,7 +96,7 @@
         setInterval(changeImage, 8000);
         changeImage();
 
-        // --- KOMUNIKACJA Z GMODEM ---
+        // --- KOMUNIKACJA Z GMODEM I MUZYKĄ ---
         function GameDetails(servername, serverurl, mapname) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
