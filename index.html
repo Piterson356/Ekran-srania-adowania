@@ -18,16 +18,24 @@
         
         .main-layout { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-around; height: 100vh; padding: 0 50px; }
         
+        /* Standardowe panele boczne */
         .side-panel { 
             background: rgba(0, 0, 0, 0.85); padding: 30px; border-radius: 20px; 
             border: 1px solid rgba(0, 170, 255, 0.2); width: 320px; min-height: 250px; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
         }
 
-        /* Dodatkowa klasa dla środkowego panelu, by mógł być nieco szerszy jeśli trzeba */
-        .center-panel-box {
-            width: 400px; /* Nieco szerszy niż boczne dla lepszej czytelności nazwy serwera */
-            justify-content: center; /* Wyśrodkowanie zawartości w pionie */
+        /* Środkowy panel - prostokątny */
+        .center-panel-rect {
+            background: rgba(0, 0, 0, 0.85); 
+            padding: 40px 60px; 
+            border-radius: 15px; 
+            border: 1px solid rgba(0, 170, 255, 0.3); 
+            width: 500px; /* Szerszy prostokąt */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
         }
 
         /* --- STYL LISTY TRYBÓW --- */
@@ -50,8 +58,8 @@
             letter-spacing: 1px;
         }
 
-        h1 { color: #00aaff; margin: 10px 0; text-transform: uppercase; letter-spacing: 4px; font-size: 24px; text-align: center; }
-        .info-row { color: #aaa; font-size: 14px; margin: 8px 0; text-transform: uppercase; }
+        h1 { color: #00aaff; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 5px; font-size: 28px; text-align: center; }
+        .info-row { color: #aaa; font-size: 14px; margin: 5px 0; text-transform: uppercase; letter-spacing: 1px; }
         .info-row span { color: white; font-weight: bold; }
     </style>
 </head>
@@ -78,14 +86,11 @@
             </div>
         </div>
         
-        <!-- ŚRODEK: INFORMACJE O SERWERZE  -->
-        <div class="side-panel center-panel-box">
-            <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
-                Status Połączenia
-            </div>
+        <!-- ŚRODEK: INFORMACJE SERWERA -->
+        <div class="center-panel-rect">
             <h1 id="servername">ŁĄCZENIE...</h1>
-            <div class="info-row">Tryb: <span id="gamemode">Wczytywanie...</span></div>
-            <div class="info-row">Mapa: <span id="mapname">Wczytywanie...</span></div>
+            <div class="info-row">TRYB: <span id="gamemode">Wczytywanie...</span></div>
+            <div class="info-row">MAPA: <span id="mapname">Wczytywanie...</span></div>
         </div>
 
         <!-- PRAWA STRONA: REGULAMIN -->
