@@ -18,12 +18,12 @@
         
         .main-layout { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-around; height: 100vh; padding: 0 50px; }
         
-        /* Panele boczne */
+        /* Panele boczne - Symetryczna wysokość */
         .side-panel { 
             background: rgba(0, 0, 0, 0.6); padding: 30px; border-radius: 20px; 
             border: 1px solid rgba(0, 170, 255, 0.3); 
             width: 320px; 
-            height: 400px;
+            height: 400px; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
             box-shadow: 0 0 20px rgba(0, 170, 255, 0.2); 
             backdrop-filter: blur(5px);
@@ -68,16 +68,14 @@
         .info-row { color: #aaa; font-size: 14px; margin: 5px 0; text-transform: uppercase; letter-spacing: 1px; }
         .info-row span { color: white; font-weight: bold; }
 
-        /* Kontener regulaminu wysunięty na środek panelu */
+        /* Kontener regulaminu */
         .rules-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
             color: #ddd;
             font-size: 0.85rem;
-            line-height: 2;
+            line-height: 1.8;
             width: 100%;
+            text-align: left;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -88,7 +86,7 @@
 
     <div class="main-layout">
         
-        <!-- LEWA STRONA -->
+        <!-- LEWA STRONA: TRYBY -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Dostępne Tryby
@@ -103,14 +101,14 @@
             </div>
         </div>
         
-        <!-- ŚRODEK -->
+        <!-- ŚRODEK: INFO -->
         <div class="center-panel-rect">
             <h1 id="servername">ŁĄCZENIE...</h1>
             <div class="info-row">TRYB: <span id="gamemode">Wczytywanie...</span></div>
             <div class="info-row">MAPA: <span id="mapname">Wczytywanie...</span></div>
         </div>
 
-        <!-- PRAWA STRONA -->
+        <!-- PRAWA STRONA: REGULAMIN -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Regulamin
@@ -120,7 +118,7 @@
                 ➜ Mikrofon od 16 lat (lub mutacja).<br>
                 ➜ Szanuj innych graczy i administrację.<br>
                 ➜ Zakaz RDM / VDM.<br>
-                ➜ Baw się dobrze!<br>
+                ➜ Baw się dobrze!
             </div>
         </div>
 
