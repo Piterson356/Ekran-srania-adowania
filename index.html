@@ -18,25 +18,25 @@
         
         .main-layout { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-around; height: 100vh; padding: 0 50px; }
         
-        /* Panele boczne (Tryby i Regulamin) */
+        /* Panele boczne */
         .side-panel { 
             background: rgba(0, 0, 0, 0.85); padding: 30px; border-radius: 20px; 
             border: 1px solid rgba(0, 170, 255, 0.2); width: 320px; min-height: 250px; 
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
         }
 
-        /* Środkowy panel - prostokątny z informacjami */
+        /* Środkowy panel - prostokątny z LEKKĄ POŚWIATĄ */
         .center-panel-rect {
             background: rgba(0, 0, 0, 0.85); 
             padding: 40px 60px; 
             border-radius: 15px; 
-            border: 1px solid rgba(0, 170, 255, 0.3); 
+            border: 1px solid rgba(0, 170, 255, 0.5); /* Nieco wyraźniejsza krawędź */
             width: 500px; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            box-shadow: 0 0 20px rgba(0, 170, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 170, 255, 0.3); /* EFEKT POŚWIATY (GLOW) */
         }
 
         /* --- STYL LISTY TRYBÓW --- */
@@ -59,7 +59,7 @@
             letter-spacing: 1px;
         }
 
-        h1 { color: #00aaff; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 5px; font-size: 28px; text-align: center; }
+        h1 { color: #00aaff; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 5px; font-size: 28px; text-align: center; text-shadow: 0 0 10px rgba(0, 170, 255, 0.5); }
         .info-row { color: #aaa; font-size: 14px; margin: 5px 0; text-transform: uppercase; letter-spacing: 1px; }
         .info-row span { color: white; font-weight: bold; }
     </style>
@@ -71,9 +71,7 @@
 
     <div class="main-layout">
         
-        <!-- ========================================== -->
         <!-- LEWA STRONA: LISTA TRYBÓW -->
-        <!-- ========================================== -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Dostępne Tryby
@@ -89,18 +87,14 @@
             </div>
         </div>
         
-        <!-- ========================================== -->
         <!-- ŚRODEK: INFORMACJE SERWERA -->
-        <!-- ========================================== -->
         <div class="center-panel-rect">
             <h1 id="servername">ŁĄCZENIE...</h1>
             <div class="info-row">TRYB: <span id="gamemode">Wczytywanie...</span></div>
             <div class="info-row">MAPA: <span id="mapname">Wczytywanie...</span></div>
         </div>
 
-        <!-- ========================================== -->
         <!-- PRAWA STRONA: REGULAMIN -->
-        <!-- ========================================== -->
         <div class="side-panel">
             <div style="color:#00ffcc; text-transform:uppercase; border-bottom:1px solid #333; width:100%; text-align:center; padding-bottom:8px; margin-bottom:15px;">
                 Regulamin
@@ -139,7 +133,7 @@
             document.getElementById("gamemode").innerText = gamemode;
             
             const music = document.getElementById("loading-music");
-            music.volume = 0.7; 
+            music.volume = 0.2; 
             music.play().catch(() => {});
         }
 
