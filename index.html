@@ -181,17 +181,19 @@
             const items = document.querySelectorAll('.gamemode-item');
             let displayName = gamemode;
 
-            items.forEach(item => {
-                let cleanItem = item.innerText.toLowerCase().trim();
-                let cleanGM = gamemode.toLowerCase().trim();
+            let cleanGM = gamemode.toLowerCase().replace(/[^a-z0-9]/g, '');
 
+            items.forEach(item => {
+                let cleanItem = item.innerText.toLowerCase().replace(/[^a-z0-9]/g, '');
+        
                 if (cleanItem.includes(cleanGM) || cleanGM.includes(cleanItem)) {
-                    displayName = item.innerText;
+                    displayName = item.innerText; 
                 }
             });
 
             document.getElementById("gamemode").innerText = displayName;
 
+            // Głośność muzyki
             const music = document.getElementById("loading-music");
             music.volume = 0.02; 
             music.play().catch(() => {});
