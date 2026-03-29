@@ -177,19 +177,8 @@
         function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode) {
             document.getElementById("servername").innerText = servername;
             document.getElementById("mapname").innerText = mapname;
-
-            const items = document.querySelectorAll('.gamemode-item');
-            let displayName = gamemode;
-
-            items.forEach(item => {
-                let cleanItem = item.innerText.toLowerCase().replace(/[^a-z0-9]/g, '');
-                let cleanGM = gamemode.toLowerCase().replace(/[^a-z0-9]/g, '');
-                if (cleanItem.includes(cleanGM) || cleanGM.includes(cleanItem)) {
-                    displayName = item.innerText;
-                }
-            });
-            document.getElementById("gamemode").innerText = displayName;
-            
+            document.getElementById("gamemode").innerText = gamemode;
+    
             const music = document.getElementById("loading-music");
             music.volume = 0.02; 
             music.play().catch(() => {});
